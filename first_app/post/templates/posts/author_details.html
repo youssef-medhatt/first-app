@@ -1,0 +1,29 @@
+{%extends "base.html"%} {% block content %}
+
+<div>
+<h3><u><b>Author:</b></u> {{ author.name }}</h3>
+<h3><u><b>Email:</b></u> {{ author.email }}</h3>
+<h3><u><b>Phone No:</b></u> {{ author.phone }}</h3>
+
+  
+</div>
+{%if posts|length == 1%}
+<h1>{{ posts|length }} Post by {{ author.name }}</h1>
+{% else %}
+<h1>{{ posts|length }} Posts by {{ author.name }}</h1>
+{% endif %}
+
+
+<div>
+  {% for post in posts %}
+  <div>
+    <h2><a href="{% url 'post_detail' post.id %}"> {{ post.title }}</a></h2>
+    <p>Published on: {{ post.published_date }}</p>
+  </div>
+  {% empty %}
+  <p>No posts by this author.</p>
+  {% endfor %}
+</div>
+  
+  
+  {% endblock %}
